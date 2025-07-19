@@ -4,8 +4,10 @@
 
 set -euo pipefail
 
+pushd terraform
 terraform apply --var="project=$1"
 
 gcloud compute scp install.sh vllm-instance:~
-gcloud compute ssh vllm-instance "bash install.sh"
+popd
+
 gcloud compute ssh vllm-instance
