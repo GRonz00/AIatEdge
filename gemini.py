@@ -34,12 +34,12 @@ def run(model="gemini-2.5-flash",thinking=False):
                 ),
             )
             end = time.time()
-            answer = response.text.strip().replace("\n", " ")
+            answer = response.text.strip().replace("\n", " ") if response.text else None
             usage = response.usage_metadata
-            writer.writerow([q, answer, end - start,usage.prompt_token_count,usage.candidates_token_count,usage.thoughtsTokenCount,usage.total_token_count])
+            writer.writerow([q, answer, end - start,usage.prompt_token_count,usage.candidates_token_count,usage.thoughts_token_count,usage.total_token_count])
 
 if __name__ == "__main__":
     run("gemini-2.5-flash",False)
     run("gemini-2.5-flash",True)
     run("gemini-2.5-flash-lite",False)
-    run("gemini-2.5-flash",True)
+    run("gemini-2.5-flash-lite",True)
