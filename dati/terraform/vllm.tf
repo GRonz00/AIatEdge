@@ -12,7 +12,7 @@ terraform {
 provider "google" {
   project = var.project
   region  = "us-central1"
-  zone    = "us-central1-f"
+  zone    = "us-central1-b"
 }
 
 variable "project" {
@@ -26,7 +26,7 @@ resource "google_compute_instance" "vllm-instance" {
 
     initialize_params {
       image = "projects/ml-images/global/images/c0-deeplearning-common-cu124-v20250325-debian-11-py310-conda"
-      size  = 50
+      size  = 200
       type  = "pd-balanced"
     }
 
@@ -39,14 +39,14 @@ resource "google_compute_instance" "vllm-instance" {
 
   guest_accelerator {
     count = 1
-    type  = "projects/${var.project}/zones/us-central1-f/acceleratorTypes/nvidia-tesla-t4"
+    type  = "projects/${var.project}/zones/us-central1-b/acceleratorTypes/nvidia-l4"
   }
 
   labels = {
     goog-ec-src = "vm_add-tf"
   }
 
-  machine_type = "n1-standard-2"
+  machine_type = "g2-standard-4"
   name         = "vllm-instance"
 
   network_interface {
@@ -78,5 +78,5 @@ resource "google_compute_instance" "vllm-instance" {
   }
 
   tags = ["https-server"]
-  zone = "us-central1-f"
+  zone = "us-central1-b"
 }

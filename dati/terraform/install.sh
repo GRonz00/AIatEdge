@@ -9,3 +9,7 @@ pushd project
 uv venv --seed
 source .venv/bin/activate
 uv pip install vllm --torch-backend=auto
+#pip install nvidia-ml-py3
+pip install flashinfer-python
+pip install timm
+pip install locust

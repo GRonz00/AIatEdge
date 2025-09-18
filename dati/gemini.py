@@ -12,7 +12,7 @@ def run(model="gemini-2.5-flash",thinking=False):
     if thinking:
         #thinking dinamico, il modello sceglio quando e quanto pensare
         t=types.ThinkingConfig(thinking_budget=-1)
-    with open("nq-dev-sample.json", 'r') as f:
+    with open("prompts.json", 'r') as f:
         for i, line in enumerate(f):
             if i >= N:
                 break
